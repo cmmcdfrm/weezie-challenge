@@ -23,6 +23,7 @@ services:
       - laravel
 
   php:
+    restart: always
     build:
       context: .
       dockerfile: php.dockerfile
@@ -32,10 +33,10 @@ services:
     container_name: php
     volumes:
       - ./src:/var/www/html:delegated
-    networks:
-      - laravel
     depends_on:
       - mysql
+    networks:
+      - laravel
 
   mysql:
     image: mysql:5.7.29
