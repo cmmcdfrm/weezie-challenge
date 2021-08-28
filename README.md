@@ -1,4 +1,6 @@
-# Requirements
+# Weezie code challenge - API for users management
+
+## Requirements
 - Docker
 - docker-compose
 
