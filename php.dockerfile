@@ -28,5 +28,5 @@ RUN mkdir -p /usr/src/php/ext/redis \
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-CMD bash -c "composer install --prefer-dist --no-interaction && php-fpm -y /usr/local/etc/php-fpm.conf -R"
+CMD bash -c "composer install --prefer-dist --no-interaction && php artisan migrate && php-fpm -y /usr/local/etc/php-fpm.conf -R"
     
