@@ -22,6 +22,21 @@ services:
     networks:
       - laravel
 
+  php:
+    build:
+      context: .
+      dockerfile: php.dockerfile
+      args:
+        - PHPUSER=${PHPUSER:-www-data}
+        - PHPGROUP=${PHPGROUP:-www-data}
+    container_name: php
+    volumes:
+      - ./src:/var/www/html:delegated
+    networks:
+      - laravel
+    depends_on:
+      - mysql
+
   mysql:
     image: mysql:5.7.29
     container_name: mysql
@@ -40,16 +55,3 @@ services:
       - laravel
     volumes:
       - ./mysql/data:/var/lib/mysql
-
-  php:
-    build:
-      context: .
-      dockerfile: php.dockerfile
-      args:
-        - PHPUSER=${PHPUSER:-www-data}
-        - PHPGROUP=${PHPGROUP:-www-data}
-    container_name: php
-    volumes:
-      - ./src:/var/www/html:delegated
-    networks:
-      - laravel
